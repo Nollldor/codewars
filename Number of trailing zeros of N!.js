@@ -4,63 +4,30 @@ N! = 1 * 2 * 3 * ... * N
 */
 
 function zeros (n) {
-
-    function factorial(n){
-        if(n===1||n===0){
-            return 1;
+    let num = BigInt(n);
+    function factorial(num){
+        if(num===1n||num===0n){
+            return BigInt(1);
         }else{
-            return n * factorial(n-1);
+            return BigInt(num * factorial(num-1n));
         }
     }
 
 
-    let nString = factorial(n).toString().split("").join("");
+    let nString = factorial(num).toString().split("").join("");
     console.log(nString);
-    if (n>21) {
-        let pointFlag = false;
-        let eFlag = false;
-        let reminderCounter = 0;
-        let arrayOfZeros = [];
-
-        for (let char of nString) {
-            if (char === '.') {
-                pointFlag = true;
-                continue;
-            }
-
-            if (char === 'e') {
-                eFlag = true;
-                pointFlag = false;
-                continue;
-            }
-
-            if (pointFlag) {
-                reminderCounter++;
-            }
-
-            if (eFlag) {
-                arrayOfZeros.push(char);
-            }
+    let counterOfZeros = 0;
+    let nStringReverse = nString.split("").reverse().join('');
+    for (let char of nStringReverse) {
+        if(char==='0'){
+            counterOfZeros++;
+        }else{
+            break;
         }
-        arrayOfZeros.shift();
-        let tenDegree = parseInt(arrayOfZeros.join(''));
-
-        return tenDegree - reminderCounter;
-    }else{
-        let counterOfZeros = 0;
-        let nStringReverse = nString.split("").reverse().join('');
-        for (let char of nStringReverse) {
-            if(char==='0'){
-                counterOfZeros++;
-            }else{
-                break
-            }
-        }
-        return counterOfZeros;
     }
-
+    return counterOfZeros;
 }
 
-let num = 24;
+let num = 30;
 
 console.log(zeros(num));
